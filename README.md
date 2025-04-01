@@ -1,4 +1,59 @@
-# IA610 智能麦克风模组项目
+# IA610 智能麦克风模组官网
+
+这是 IA610 智能麦克风模组的官方网站。
+
+## 部署步骤
+
+1. 安装 Vercel CLI（可选）：
+   ```bash
+   npm install -g vercel
+   ```
+
+2. 登录 Vercel：
+   ```bash
+   vercel login
+   ```
+
+3. 部署到 Vercel：
+   ```bash
+   vercel
+   ```
+
+4. 添加自定义域名：
+   - 登录 Vercel 控制台
+   - 进入项目设置
+   - 添加域名：ia610.com
+   - 按照提示配置 DNS 记录
+
+## 本地开发
+
+1. 安装依赖：
+   ```bash
+   npm install
+   ```
+
+2. 运行开发服务器：
+   ```bash
+   npm run dev
+   ```
+
+## 目录结构
+
+```
+public/
+├── index.html      # 主页面
+├── css/           # 样式文件
+├── js/            # JavaScript文件
+├── images/        # 图片资源
+└── downloads/     # 下载文件
+```
+
+## 技术栈
+
+- HTML5
+- CSS3
+- JavaScript
+- Vercel 部署
 
 ## 项目概述
 IA610是一款高性能的智能麦克风模组，集成了先进的语音处理技术。本项目包含了IA610模组的开发文档、SDK和设计指南，旨在帮助开发者快速集成和使用IA610模组。

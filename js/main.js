@@ -199,4 +199,95 @@ backToTop.addEventListener('click', () => {
         top: 0,
         behavior: 'smooth'
     });
-}); 
+});
+
+// 处理下载点击事件
+function handleDownload(event, type) {
+    event.preventDefault();
+    
+    // 获取下载链接
+    const downloadUrl = event.currentTarget.href;
+    
+    // 检查用户是否已登录或有权限下载（这里可以根据实际需求修改）
+    const canDownload = true; // 这里可以添加实际的权限检查逻辑
+    
+    if (canDownload) {
+        // 创建一个表单来收集用户信息
+        const userInfo = {
+            name: localStorage.getItem('userName'),
+            company: localStorage.getItem('userCompany'),
+            email: localStorage.getItem('userEmail')
+        };
+        
+        // 如果没有用户信息，显示信息收集弹窗
+        if (!userInfo.name || !userInfo.company || !userInfo.email) {
+            showDownloadForm(type, downloadUrl);
+        } else {
+            // 如果已有用户信息，直接开始下载
+            startDownload(downloadUrl);
+        }
+    } else {
+        alert('请先登录或联系技术支持获取下载权限');
+    }
+}
+
+// 显示下载信息收集表单
+function showDownloadForm(type, downloadUrl) {
+    // 创建模态框
+    const modal = document.createElement('div');
+    modal.className = 'download-modal';
+    modal.innerHTML = `
+        <div class="download-form">
+            <h3>下载${type}</h3>
+            <p>请填写以下信息以开始下载</p>
+            <form id="downloadForm">
+                <div class="form-group">
+                    <input type="text" id="userName" placeholder="您的姓名" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="userCompany" placeholder="公司名称" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="userEmail" placeholder="电子邮箱" required>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit" class="btn primary">开始下载</button>
+                    <button type="button" class="btn secondary" onclick="closeDownloadForm()">取消</button>
+                </div>
+            </form>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // 添加表单提交事件
+    document.getElementById('downloadForm').onsubmit = function(e) {
+        e.preventDefault();
+        
+        // 保存用户信息
+        const userName = document.getElementById('userName').value;
+        const userCompany = document.getElementById('userCompany').value;
+        const userEmail = document.getElementById('userEmail').value;
+        
+        localStorage.setItem('userName', userName);
+        localStorage.setItem('userCompany', userCompany);
+        localStorage.setItem('userEmail', userEmail);
+        
+        // 关闭表单并开始下载
+        closeDownloadForm();
+        startDownload(downloadUrl);
+    };
+}
+
+// 关闭下载表单
+function closeDownloadForm() {
+    const modal = document.querySelector('.download-modal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+// 开始下载
+function startDownload(url) {
+    window.location.href = url;
+} 

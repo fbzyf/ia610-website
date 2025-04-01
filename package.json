@@ -1,0 +1,13 @@
+{
+  "name": "ia610-website",
+  "version": "1.0.0",
+  "description": "IA610 智能麦克风模组官网",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel deploy --prod"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "vercel": "^32.0.0"
+  }
+} 
